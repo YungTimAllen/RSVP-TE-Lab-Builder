@@ -5,70 +5,16 @@ Nodes:
 - ID: 1
   Interfaces:
   - Name: Gi1
-    Attaches_ID: 2
-  - Name: Gi2
     Attaches_ID: 3
-  - Name: Gi3
-    Attaches_ID: 4
 - ID: 2
   Interfaces:
-  - Name: Gi0/0
-    Attaches_ID: 1
-  - Name: Gi1/0
-    Attaches_ID: 5
+  - Name: Gi1
+    Attaches_ID: 3
 - ID: 3
   Interfaces:
   - Name: Gi0/0
     Attaches_ID: 1
   - Name: Gi1/0
-    Attaches_ID: 5
-  - Name: Gi2/0
-    Attaches_ID: 6
-- ID: 4
-  Interfaces:
-  - Name: Gi0/0
-    Attaches_ID: 1
-  - Name: Gi1/0
-    Attaches_ID: 6
-- ID: 5
-  Interfaces:
-  - Name: Gi0/0
     Attaches_ID: 2
-  - Name: Gi1/0
-    Attaches_ID: 3
-  - Name: Gi2/0
-    Attaches_ID: 7
-  - Name: Gi3/0
-    Attaches_ID: 8
-- ID: 6
-  Interfaces:
-  - Name: Gi0/0
-    Attaches_ID: 3
-  - Name: Gi1/0
-    Attaches_ID: 4
-  - Name: Gi2/0
-    Attaches_ID: 7
-  - Name: Gi3/0
-    Attaches_ID: 8
-- ID: 7
-  Interfaces:
-  - Name: Gi0/0
-    Attaches_ID: 5
-  - Name: Gi1/0
-    Attaches_ID: 6
-  - Name: Gi2/0
-    Attaches_ID: 9
-- ID: 8
-  Interfaces:
-  - Name: Gi0/0
-    Attaches_ID: 5
-  - Name: Gi1/0
-    Attaches_ID: 6
-  - Name: Gi2/0
-    Attaches_ID: 9
-- ID: 9
-  Interfaces:
-  - Name: Gi1
-    Attaches_ID: 7
-  - Name: Gi2
-    Attaches_ID: 8
+
+
