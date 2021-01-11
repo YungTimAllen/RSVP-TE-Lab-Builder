@@ -10,7 +10,7 @@ def main(args: Namespace):
     with open(args.topology_file, "r") as fp_:
         render(
             data=yaml.safe_load(fp_),
-            path_to_j2=args.template if args.template else "ios-classic.j2",
+            path_to_j2=args.template if args.template else "ios-classic-ospf.j2",
         )
 
 
@@ -29,6 +29,6 @@ if __name__ == "__main__":
     parser = ArgumentParser(description="Render templates for node config")
     parser.add_argument("topology_file", type=str, help="YAML defining topology")
     parser.add_argument(
-        "--template", type=str, help="Use a custom template. Default: ./ios-classic.j2"
+        "--template", type=str, help="Use a custom template. Default: ./ios-classic-ospf.j2"
     )
     main(parser.parse_args())
