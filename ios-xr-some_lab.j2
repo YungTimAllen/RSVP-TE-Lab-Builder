@@ -1,0 +1,44 @@
+{% for node in Nodes %}
+! - - - Node {{node.ID}} - - - - - - - - - - - - - - - - - - - - -
+
+hostname P{{node.ID}}
+line con exec-timeout 0 0
+logging console debug
+
+interface Loopback0
+ description Management and Primary Steering Loopback
+ ipv4 address {{Config.Loopback_Prefix}}{{node.ID}}/32
+ ipv6 address 2011:0301::{{node.ID}}/128
+{% for interface in node.Interfaces %}
+interface {{interface.Name}}
+ no shutdown
+ description To Node {{interface.Attaches_ID}}
+ ip address 10.{{[node.ID, interface.Attaches_ID]|min}}.{{[node.ID, interface.Attaches_ID]|max}}.{{node.ID}} 255.255.255.0
+{% endfor %}
+router isis 1
+ log-adjacency-changes
+ net 49.1234.0000.0000.{{ '%04d' % node.ID }}.00
+ is-type level-2-only
+ address-family ipv4
+  metric-style wide
+  mpls traffic-eng router-id Loopback0
+  mpls traffic-eng level-2
+  exit
+ interface loopback0
+  passive
+  address-family ipv4
+   exit{% for interface in node.Interfaces %}
+ interface {{interface.Name}}
+  point-to-point
+  suppressed
+  address-family ipv4 unicast{% endfor %}
+
+mpls traffic-eng{% for interface in node.Interfaces %}
+ interface {{interface.Name}}
+  admin-weight 128{% endfor %}
+ root
+rsvp{% for interface in node.Interfaces %}
+ interface {{interface.Name}}
+  bandwidth 1000000{% endfor %}
+ root
+{% endfor %}

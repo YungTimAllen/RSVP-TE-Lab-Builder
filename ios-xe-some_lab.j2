@@ -1,0 +1,46 @@
+{% for node in Nodes %}
+! - - - Node {{node.ID}} - - - - - - - - - - - - - - - - - - - - -
+
+hostname P{{node.ID}}
+no ip domain lookup
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ipv6 unicast-routing
+
+mpls traffic-eng tunnels
+mpls traffic-eng logging lsp path-errors
+mpls traffic-eng logging lsp reservation-errors
+mpls traffic-eng logging lsp preemption
+mpls traffic-eng logging lsp setups
+mpls traffic-eng logging lsp teardowns
+mpls traffic-eng logging tunnel lsp-selection
+mpls traffic-eng logging tunnel path change
+
+interface Loopback0
+ description Management and Primary Steering Loopback
+ ip address {{Config.Loopback_Prefix}}{{node.ID}} 255.255.255.255
+ ipv6 address 2011:0301::{{node.ID}}/128
+ ip router isis 1
+
+router isis 1
+ net 49.1234.0000.0000.{{ '%04d' % node.ID }}.00
+ log-adjacency-changes
+ passive-interface lo0
+ is-type level-2-only
+ metric-style wide
+ mpls traffic-eng router-id Loopback0
+ mpls traffic-eng level-2
+{% for interface in node.Interfaces %}
+interface {{interface.Name}}
+ no shutdown
+ description To Node {{interface.Attaches_ID}}
+ carrier-delay msec 100
+ ip address 10.{{[node.ID, interface.Attaches_ID]|min}}.{{[node.ID, interface.Attaches_ID]|max}}.{{node.ID}} 255.255.255.0
+ mpls traffic-eng tunnels
+ ip router isis 1
+ isis network point-to-point
+ no isis advertise prefix
+ ip rsvp bandwidth 100
+{% endfor %}{% endfor %}

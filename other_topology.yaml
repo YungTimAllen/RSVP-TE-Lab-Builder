@@ -1,0 +1,73 @@
+---
+Config:
+  Loopback_Prefix: "10.200.1."
+Nodes:
+- ID: 1
+  Interfaces:
+  - Name: Gi0/0/0/1
+    Attaches_ID: 2
+  - Name: Gi0/0/0/2
+    Attaches_ID: 3
+- ID: 2
+  Interfaces:
+  - Name: Gi0/0/0/1
+    Attaches_ID: 4
+  - Name: Gi0/0/0/2
+    Attaches_ID: 1
+  - Name: Gi0/0/0/3
+    Attaches_ID: 3
+  - Name: Gi0/0/0/4
+    Attaches_ID: 5
+- ID: 3
+  Interfaces:
+  - Name: Gi1
+    Attaches_ID: 2
+  - Name: Gi2
+    Attaches_ID: 1
+  - Name: Gi3
+    Attaches_ID: 5
+  - Name: Gi4
+    Attaches_ID: 6
+  - Name: Gi5
+    Attaches_ID: 6
+- ID: 4
+  Interfaces:
+  - Name: Gi0/0/0/1
+    Attaches_ID: 2
+  - Name: Gi0/0/0/2
+    Attaches_ID: 6
+- ID: 5
+  Interfaces:
+  - Name: Gi0/0/0/1
+    Attaches_ID: 3
+  - Name: Gi0/0/0/2
+    Attaches_ID: 6
+  - Name: Gi0/0/0/3
+    Attaches_ID: 7
+  - Name: Gi0/0/0/4
+    Attaches_ID: 2
+- ID: 6
+  Interfaces:
+  - Name: Gi1
+    Attaches_ID: 4
+  - Name: Gi2
+    Attaches_ID: 5
+  - Name: Gi3
+    Attaches_ID: 8
+  - Name: Gi4
+    Attaches_ID: 3
+  - Name: Gi5
+    Attaches_ID: 3
+- ID: 7
+  Interfaces:
+  - Name: Gi1
+    Attaches_ID: 5
+  - Name: Gi2
+    Attaches_ID: 8
+- ID: 8
+  Interfaces:
+  - Name: Gi1
+    Attaches_ID: 7
+  - Name: Gi2
+    Attaches_ID: 6
+
